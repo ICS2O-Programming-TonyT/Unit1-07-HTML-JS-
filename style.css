@@ -16,3 +16,17 @@
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+/* Corrected class selectors */
+.mdl-button--raised,
+.mdl-button--fab,
+.mdl-switch__thumb {
+  background-color: #2196f3;
+}
+
+/* Set the accent color of the MDL components */
+.mdl-button--raised.mdl-button--colored,
+.mdl-button--fab.mdl-button--colored,
+.mdl-switch__thumb--is-checked {
+  background-color: #ffc107;
+}
