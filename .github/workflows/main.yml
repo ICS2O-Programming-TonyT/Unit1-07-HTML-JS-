@@ -1,4 +1,6 @@
-name: My Super Linter
+# Run GitHub's Super Linter against code base
+
+name: GitHub's Super Linter
 
 on: push
 
@@ -28,7 +30,7 @@ jobs:
       # Configuration for GitHub Super Linter
       - name: Configure Linter
         run: |
-          echo 'LINTER_RULES='"$(echo '{ "enable": ["html", "css", "javascript"], "html": { "enable": ["id-class-value"], "disable": ["line-length"] }, "css": { "disable": ["zero-unit", "hex-length", "important-rule", "unique-headings", "qualified-headings", "box-model", "universal-selector", "duplicate-properties"] }, "javascript": { "disable": ["no-for-loop", "no-ternary", "no-trailing-spaces"] } }' | base64 --wrap=0)" >> $GITHUB_ENV
+          echo 'LINTER_RULES='"$(echo '{ "enable": ["html", "css", "javascript", "markdown"], "html": { "enable": ["id-class-value"], "disable": ["line-length"] }, "css": { "disable": ["zero-unit", "hex-length", "important-rule", "unique-headings", "qualified-headings", "box-model", "universal-selector", "duplicate-properties"] }, "javascript": { "disable": ["no-for-loop", "no-ternary", "no-trailing-spaces"] }, "markdown": { "enable": ["MD012"], "disable": ["MD033"] } }' | base64 --wrap=0)" >> $GITHUB_ENV
         shell: bash
 
       # Install jq for JSON processing
