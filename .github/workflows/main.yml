@@ -1,50 +1,28 @@
-# Run GitHub's Super Linter against code base
+###############################################
+
+# Run GitHub's Super Linter against code base #
+
+###############################################
 
 name: GitHub's Super Linter
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
+
   run-linters:
     name: GitHub's Super Linter
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: Run GitHub Super Linter
-        uses: github/super-linter@main
-        env:
-          VALIDATE_ALL_CODEBASE: true
-          VALIDATE_JAVASCRIPT_STANDARD: false
-          VALIDATE_JSCPD: false
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload Lint Results
-        uses: actions/upload-artifact@v2
+        uses: github/super-linter@v4
         with:
-          name: lint-results
-          path: ./super-linter-report.json
-          
-      # Configuration for GitHub Super Linter
-      - name: Configure Linter
-        run: |
-          echo 'LINTER_RULES='"$(echo '{ "enable": ["html", "css", "javascript", "markdown"], "html": { "enable": ["id-class-value"], "disable": ["line-length"] }, "css": { "disable": ["zero-unit", "hex-length", "important-rule", "unique-headings", "qualified-headings", "box-model", "universal-selector", "duplicate-properties"] }, "javascript": { "disable": ["no-for-loop", "no-ternary", "no-trailing-spaces"] }, "markdown": { "enable": ["MD012"], "disable": ["MD033"] } }' | base64 --wrap=0)" >> $GITHUB_ENV
-        shell: bash
-
-      # Install jq for JSON processing
-      - name: Install jq
-        run: sudo apt-get -y install jq
-          
-      # Run linter with custom configuration
-      - name: Run Linter
-        run: |
-          echo "$LINTER_RULES" | base64 --decode > linter_rules.json
-          github/super-linter entrypoint.sh \
-            --color \
-            --no-annotations \
-            --config linter_rules.json \
-            --fail-on-errors true \
-            --json > super-linter-report.json || true
-        shell: bash
+          validate_all_codebase: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          enable_mdl: true
