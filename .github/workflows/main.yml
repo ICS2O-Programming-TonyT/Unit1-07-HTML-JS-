@@ -40,4 +40,4 @@ jobs:
 
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          
-         SUPER_LINTER_RULES_PATH: .github/linters/mysuperlinter.yml
+         SUPER_LINTER_RULES_PATH: .github/workflows/main.yml
