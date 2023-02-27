@@ -1,41 +1,59 @@
-###############################################
-
-# Run GitHub's Super Linter against code base #
-
-###############################################
-
-name: GitHub's Super Linter
+# .github/workflows/mysuperlinter.yml
+name: My Super Linter
 
 on: push
 
 jobs:
+  run-linters:
+    name: GitHub's Super Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@master
 
- run-linters:
+      - name: Run GitHub Super Linter
+        uses: github/super-linter@main
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_JSCPD: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-   name: GitHub's Super Linter
+      - name: Upload Lint Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint-results
+          path: ./super-linter-report.json
+          
+# Configuration for GitHub Super Linter
 
-   runs-on: ubuntu-latest
+linter:
+  rules:
+    enable:
+      - html
+      - css
+      - javascript
 
-   steps:
+    html:
+      enable:
+        - id-class-value
+      disable:
+        - line-length
 
-     - name: Check out Git repository
+    css:
+      disable:
+        - zero-unit
+        - hex-length
+        - important-rule
+        - unique-headings
+        - qualified-headings
+        - box-model
+        - universal-selector
+        - duplicate-properties
 
-       uses: actions/checkout@master
-
-     - name: Run GitHub Super Linter
-
-       uses: github/super-linter@main
-
-       env:
-
-         VALIDATE_ALL_CODEBASE: true
-
-         VALIDATE_JAVASCRIPT_STANDARD: false
-
-         VALIDATE_JSCPD: false
-
-         DEFAULT_BRANCH: main
-
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-         SUPER_LINTER_RULES_PATH: .github/workflows/mysuperlinter.yml
+    javascript:
+      disable:
+        - no-for-loop
+        - no-ternary
+        - no-trailing-spaces
