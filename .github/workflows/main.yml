@@ -28,7 +28,7 @@ jobs:
       # Configuration for GitHub Super Linter
       - name: Configure Linter
         run: |
-          echo '::set-env name=LINTER_RULES::'"$(echo '{ "enable": ["html", "css", "javascript"], "html": { "enable": ["id-class-value"], "disable": ["line-length"] }, "css": { "disable": ["zero-unit", "hex-length", "important-rule", "unique-headings", "qualified-headings", "box-model", "universal-selector", "duplicate-properties"] }, "javascript": { "disable": ["no-for-loop", "no-ternary", "no-trailing-spaces"] } }' | base64 --wrap=0)"
+          echo 'LINTER_RULES='"$(echo '{ "enable": ["html", "css", "javascript"], "html": { "enable": ["id-class-value"], "disable": ["line-length"] }, "css": { "disable": ["zero-unit", "hex-length", "important-rule", "unique-headings", "qualified-headings", "box-model", "universal-selector", "duplicate-properties"] }, "javascript": { "disable": ["no-for-loop", "no-ternary", "no-trailing-spaces"] } }' | base64 --wrap=0)" >> $GITHUB_ENV
         shell: bash
 
       # Install jq for JSON processing
