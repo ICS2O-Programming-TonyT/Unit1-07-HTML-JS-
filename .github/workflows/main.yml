@@ -1,4 +1,3 @@
-
 name: My Super Linter
 
 on: push
@@ -26,34 +25,24 @@ jobs:
           name: lint-results
           path: ./super-linter-report.json
           
-# Configuration for GitHub Super Linter
+      # Configuration for GitHub Super Linter
+      - name: Configure Linter
+        run: |
+          echo '::set-env name=LINTER_RULES::'"$(echo '{ "enable": ["html", "css", "javascript"], "html": { "enable": ["id-class-value"], "disable": ["line-length"] }, "css": { "disable": ["zero-unit", "hex-length", "important-rule", "unique-headings", "qualified-headings", "box-model", "universal-selector", "duplicate-properties"] }, "javascript": { "disable": ["no-for-loop", "no-ternary", "no-trailing-spaces"] } }' | base64 --wrap=0)"
+        shell: bash
 
-linter:
-  rules:
-    enable:
-      - html
-      - css
-      - javascript
-
-    html:
-      enable:
-        - id-class-value
-      disable:
-        - line-length
-
-    css:
-      disable:
-        - zero-unit
-        - hex-length
-        - important-rule
-        - unique-headings
-        - qualified-headings
-        - box-model
-        - universal-selector
-        - duplicate-properties
-
-    javascript:
-      disable:
-        - no-for-loop
-        - no-ternary
-        - no-trailing-spaces
+      # Install jq for JSON processing
+      - name: Install jq
+        run: sudo apt-get -y install jq
+          
+      # Run linter with custom configuration
+      - name: Run Linter
+        run: |
+          echo "$LINTER_RULES" | base64 --decode > linter_rules.json
+          github/super-linter entrypoint.sh \
+            --color \
+            --no-annotations \
+            --config linter_rules.json \
+            --fail-on-errors true \
+            --json > super-linter-report.json || true
+        shell: bash
