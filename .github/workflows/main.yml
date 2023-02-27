@@ -1,4 +1,4 @@
-# .github/workflows/mysuperlinter.yml
+
 name: My Super Linter
 
 on: push
