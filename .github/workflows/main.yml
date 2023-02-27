@@ -39,5 +39,11 @@ jobs:
          DEFAULT_BRANCH: main
 
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         
+
+         HTML_ES_LINT: "true"
+         HTML_ES_IGNORE: "mdl-button"
+         CSS_LINT: "true"
+         CSS_ES_IGNORE: "mdl-button"
+         JS_STANDARD: "false"
+         JS_ES_IGNORE: "mdl-button"
          markdownlint: true
