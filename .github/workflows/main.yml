@@ -1,8 +1,4 @@
-###############################################
-
 # Run GitHub's Super Linter against code base #
-
-###############################################
 
 ---
 
@@ -12,36 +8,30 @@ on: push
 
 jobs:
 
- run-linters:
+  run-linters:
 
-   name: GitHub's Super Linter
+    name: GitHub's Super Linter
 
-   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-   steps:
+    steps:
 
-     - name: Check out Git repository
+      - name: Check out Git repository
 
-       uses: actions/checkout@master
+        uses: actions/checkout@master
 
-     - name: Run GitHub Super Linter
+      - name: Run GitHub Super Linter
 
-       uses: github/super-linter@main
+        uses: github/super-linter@main
 
-       env:
+        env:
 
-         VALIDATE_ALL_CODEBASE: true
+          validate_all_codebase: true
 
-         VALIDATE_JAVASCRIPT_STANDARD: false
+          validate_javascript_standard: false
 
-         VALIDATE_JSCPD: false
+          validate_jscpd: false
 
-         VALIDATE_MARKDOWN_MDL: true
+          default_branch: main
 
-         LINTER_RULES_PATH: /
-         
-         JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
-         
-         DEFAULT_BRANCH: main
-
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
