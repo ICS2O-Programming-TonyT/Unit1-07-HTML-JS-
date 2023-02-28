@@ -1,4 +1,4 @@
-"env" {
+"env": {
   "alt-require": true,
   "attr-lowercase": false,
   "attr-no-duplication": false,
