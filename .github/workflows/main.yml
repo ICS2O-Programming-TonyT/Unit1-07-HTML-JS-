@@ -38,6 +38,10 @@ jobs:
 
          VALIDATE_MARKDOWN_MDL: true
 
+         LINTER_RULES_PATH: /
+         
+         JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
+         
          DEFAULT_BRANCH: main
 
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
