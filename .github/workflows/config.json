@@ -1,12 +1,9 @@
 {
   "enabled": true,
   "validators": {
-    "css": {
-      // CSS linter configuration
-    },
     "html": {
       "enabled": true,
-      "configFile": ".htmlhintrc", // Optional, if you have a specific HTML linter configuration file
+      "configFile": ".htmlhintrc",
       "excludes": [
         "**/node_modules/**"
       ],
@@ -36,18 +33,6 @@
         "tagname-lowercase": true,
         "title-require": false
       }
-    },
-    "javascript": {
-      // JavaScript linter configuration
-    },
-    "json": {
-      // JSON linter configuration
-    },
-    "markdown": {
-      // Markdown linter configuration
-    },
-    "python": {
-      // Python linter configuration
-    }
+    };
   }
 }
