@@ -1,9 +1,3 @@
-# .superlinter.yml
-rules:
-  id-class-value:
-    enabled: true
-
----
 
 name: GitHub's Super Linter
 
